@@ -18,7 +18,7 @@ The Argon2 implementation provided by [phc-winner-argon2](https://github.com/P-H
 
 Java bindings by [phxql](https://github.com/phxql/argon2-jvm) has been used because it's the only currently proposed for Java in the [bindings list](https://github.com/P-H-C/phc-winner-argon2#bindings).
 
-Due to the kind of data processed (password), the implementation without the embedded pre-compiled native libraries has been used in order to don't embed native untrusted compiled code (even if project owner of argon2-jvm is a nice guy, is just a secure approach) that will be difficult to validate (for java part, sources are provided in Maven repositories along compiled one and jar files can be decompiled if needed):
+Due to the kind of data processed (password), the implementation without the embedded pre-compiled native libraries has been used in order to don't embed native untrusted compiled code (even if project owner of argon2-jvm is a nice guy  :+1: , is just a secure approach) that will be difficult to validate (for java part, sources are provided in Maven repositories along compiled one and jar files can be decompiled if needed):
 
 https://github.com/phxql/argon2-jvm/blob/master/docs/compile-argon2.md
 

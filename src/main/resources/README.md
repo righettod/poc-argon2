@@ -4,4 +4,4 @@ They are based on the release [20171227](https://github.com/P-H-C/phc-winner-arg
 
 Windows DLL has been compiled using Visual Studio 2017 Community Edition (no special operations, just open the project into VS and launch compilation).
 
-:red_circle: Do not used these compiled DLL in your production environment, compile your own version ! :red_circle:
+ :warning: Do not used these compiled DLL in your production environment, compile your own version !  :warning:
