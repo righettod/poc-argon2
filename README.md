@@ -61,3 +61,8 @@ PARALLELISM=4
 # Run unit tests
 
 Run the following command line `gradlew test` from the project root folder.
+
+# TODO
+
+[ ] Add TravisCI build with Argon2 lib auto compilation
+[ ] Update OWASP article with POC information
