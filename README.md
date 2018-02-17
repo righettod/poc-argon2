@@ -64,5 +64,5 @@ Run the following command line `gradlew test` from the project root folder.
 
 # TODO
 
-[ ] Add TravisCI build with Argon2 lib auto compilation
-[ ] Update OWASP article with POC information
+- [ ] Add TravisCI build with Argon2 lib auto compilation for Linux
+- [ ] Update OWASP article with POC information
