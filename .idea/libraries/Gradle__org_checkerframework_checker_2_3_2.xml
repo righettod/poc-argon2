@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.checkerframework:checker:2.3.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/2.3.2/535a5b765f2e36c243103f78886da03503394428/checker-2.3.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/2.3.2/543a71b8f7f0ca9404597907e6579e24451ba411/checker-2.3.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
