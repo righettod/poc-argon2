@@ -29,14 +29,14 @@ Always name the compiled library with this format: **argon2**.(dll|so|dylib)
 Integration in company projects can use the following approach:
 1. Create a internal shared java utility library that embeed your compiled version of the Argon2 library.
 2. Use this shared java library in the differents project in order to:
-  * Prevent to embed a version of the Argon2 library in all your project.
-  * Centralize and unify the version of the Argon2 library used (important for upgrade process).
+ * Prevent to embed a version of the Argon2 library in all your project.
+ * Centralize and unify the version of the Argon2 library used (important for upgrade process).
 
 # Proposed configuration options
 
 Proposed configuration options for Argon2 are based on the following source of recommendation:
 * https://github.com/P-H-C/phc-winner-argon2/issues/59.
-* Section 9 of the The Argon2 [specifications document](https://github.com/P-H-C/phc-winner-argon2/blob/master/argon2-specs.pdf).
+* Section 9 of the Argon2 [specifications document](https://github.com/P-H-C/phc-winner-argon2/blob/master/argon2-specs.pdf).
 
 Configuration is the following:
 
