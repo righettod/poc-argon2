@@ -72,10 +72,10 @@ public class PasswordUtilTest {
     @Test
     public void testComputationDelay() {
         Instant start = Instant.now();
-        PasswordUtil.hash("test".toCharArray(), Charset.forName("UTF-8"));
+        PasswordUtil.hash(RandomStringUtils.randomAlphanumeric(8).toCharArray(), Charset.forName("UTF-8"));
         Instant end = Instant.now();
         Duration timeElapsed = Duration.between(start, end);
-        Assert.assertTrue("Duration must be >= to 2 seconds and the current result is " + timeElapsed.getSeconds() + " seconds", timeElapsed.getSeconds() >= 2);
+        Assert.assertTrue("Duration must be >= to 2 seconds and the current result is " + timeElapsed.getSeconds() + " second(s)", timeElapsed.getSeconds() >= 2);
     }
 
     /**
@@ -97,7 +97,7 @@ public class PasswordUtilTest {
             PasswordUtil.hash(p.toCharArray(), Charset.forName("UTF-8"));
             Instant end = Instant.now();
             Duration timeElapsed = Duration.between(start, end);
-            Assert.assertTrue("Duration must be >= to 2 seconds and the current result is " + timeElapsed.getSeconds() + " seconds", timeElapsed.getSeconds() >= 2);
+            Assert.assertTrue("Duration must be >= to 2 seconds and the current result is " + timeElapsed.getSeconds() + " second(s)", timeElapsed.getSeconds() >= 2);
         });
     }
 
