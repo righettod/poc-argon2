@@ -25,7 +25,7 @@ public class PasswordUtilTest {
         char[] password = "test".toCharArray();
         String hash = PasswordUtil.hash(password, Charset.forName("UTF-8"));
         Assert.assertNotNull("Hash must not be null", hash);
-        Assert.assertTrue("Hash must not be empty",hash.trim().length() > 0);
+        Assert.assertTrue("Hash must not be empty", hash.trim().length() > 0);
         String[] hashParts = hash.split("\\$");
         Assert.assertEquals("Hash must have 6 parts", 6, hashParts.length);
         Assert.assertEquals("Hash algorithm must be Argon2i", "argon2i", hashParts[1]);
@@ -75,7 +75,7 @@ public class PasswordUtilTest {
         PasswordUtil.hash("test".toCharArray(), Charset.forName("UTF-8"));
         Instant end = Instant.now();
         Duration timeElapsed = Duration.between(start, end);
-        Assert.assertTrue("Duration must be >= to 2 seconds", timeElapsed.getSeconds() >= 2);
+        Assert.assertTrue("Duration must be >= to 2 seconds and the current result is " + timeElapsed.getSeconds() + " seconds", timeElapsed.getSeconds() >= 2);
     }
 
     /**
@@ -97,7 +97,7 @@ public class PasswordUtilTest {
             PasswordUtil.hash(p.toCharArray(), Charset.forName("UTF-8"));
             Instant end = Instant.now();
             Duration timeElapsed = Duration.between(start, end);
-            Assert.assertTrue("Duration must be >= to 2 seconds", timeElapsed.getSeconds() >= 2);
+            Assert.assertTrue("Duration must be >= to 2 seconds and the current result is " + timeElapsed.getSeconds() + " seconds", timeElapsed.getSeconds() >= 2);
         });
     }
 
