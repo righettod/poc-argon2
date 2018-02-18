@@ -50,11 +50,15 @@ Configuration is the following:
 # See https://github.com/P-H-C/phc-winner-argon2/issues/59
 #
 # Number of iterations, here adapted to take at least 2 seconds
-# Tested on the following PC:
-#   CPU: Intel Core i7-2670QM 2.20 GHz with 8 logical processors and 4 cores
-#   RAM: 24GB but no customization on JVM (Java8 64 bits)
-#   OS: Windows and Linux 64 bits
-ITERATIONS=15
+# Tested on the following environments:
+#   ENV NUMBER 1: LAPTOP - 15 Iterations is enough to reach 2 seconds processing time
+#       CPU: Intel Core i7-2670QM 2.20 GHz with 8 logical processors and 4 cores
+#       RAM: 24GB but no customization on JVM (Java8 32 bits)
+#       OS: Windows 10 Pro 64 bits
+#   ENV NUMBER 2: TRAVIS CI LINUX VM - 15 Iterations is NOT enough to reach 2 seconds processing time (processing time take 1 second)
+#       See details on https://docs.travis-ci.com/user/reference/overview/#Virtualisation-Environment-vs-Operating-System
+#       "Ubuntu Precise" and "Ubuntu Trusty" using infrastructure "Virtual machine on GCE" were used (GCE = Google Compute Engine)
+ITERATIONS=28
 # The memory usage of 2^N KiB, here set to recommended value from Issue n°9 of PHC project (128 MB)
 MEMORY=128000
 # Parallelism to N threads here set to recommended value from Issue n°9 of PHC project
@@ -67,5 +71,5 @@ Run the following command line `gradlew test` from the project root folder.
 
 # TODO
 
-- [ ] Add TravisCI build with Argon2 lib auto compilation for Linux
+- [x] Add TravisCI build with Argon2 lib auto compilation for Linux
 - [ ] Update OWASP article with POC information
