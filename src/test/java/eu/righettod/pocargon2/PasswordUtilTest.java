@@ -27,7 +27,7 @@ public class PasswordUtilTest {
         Assert.assertNotNull("Hash must not be null", hash);
         Assert.assertTrue("Hash must not be empty", hash.trim().length() > 0);
         String[] hashParts = hash.split("\\$");
-        Assert.assertEquals("Hash must have 6 parts", 6, hashParts.length);
+        Assert.assertEquals("Hash must have 6 parts and the current result have " + hashParts.length + " parts (" + hash + ")", 6, hashParts.length);
         Assert.assertEquals("Hash algorithm must be Argon2i", "argon2i", hashParts[1]);
         for (char c : password) {
             Assert.assertEquals("Content must be 0", '\u0000', c);
