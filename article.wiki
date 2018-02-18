@@ -1,0 +1,181 @@
+= Argon2 usage proposition in Java =
+
+The objective is to propose a example of secure usage/integration of the Argon2 algorithm in Java application to protect password when stored.
+
+== Argon2 library used ==
+
+The Argon2 implementation provided by [https://github.com/P-H-C/phc-winner-argon2 phc-winner-argon2] project has been used because:
+* It's the reference implementation of this algorithm.
+* It's dedicated to this new algorithm so all work by the maintainer is focused on the implementation.
+* Project is active, [https://github.com/P-H-C/phc-winner-argon2/blob/master/CHANGELOG.md last release] date from december 2017.
+* There bindings for many technologies.
+
+Java bindings by [https://github.com/phxql/argon2-jvm phxql] has been used because it's currently the only binding proposed for Java in the [https://github.com/P-H-C/phc-winner-argon2#bindings bindings list] and is simple to use.
+
+[https://download.libsodium.org/doc/ libsodium] propose an implementation but it have been decided to use a dedicated project because libsodium provide several crypto features and thus work from maintainer will not focus on Argon2 implementation (however project is active and propose also bindings for many technologies).
+
+== Remark about Argon2 native library embedding ==
+
+Due to the kind of data processed (password), the implementation without the embedded pre-compiled native library has been used in order to don't embed native untrusted compiled code (''there absolutely no issue with the project owner of argon2-jvm, it is just a secure approach'') that will be difficult to validate. For java part, sources are provided in Maven repositories along jar files.
+
+Technical details about how to build the Argon2 library on different platforms are available on [https://github.com/P-H-C/phc-winner-argon2#usage PHC] repository and on [https://github.com/phxql/argon2-jvm/blob/master/docs/compile-argon2.md argon2-jvm] repository.
+
+
+'''Note:'''
+
+Always name the compiled library with this format to simplify integration with the ''argon2-jvm'' binding project:
+* For Windows: ''argon2''.dll
+* For Linux: ''libargon2''.so
+* For OSX: ''libargon2''.dylib
+
+== Integration in company projects ==
+
+Integration in company projects can use the following approach:
+# Create a internal shared java utility library that embeed your compiled version of the Argon2 library.
+# Use this shared java library in the different projects in order to:
+## Prevent to embed a version of the Argon2 library in all your project.
+## Centralize and unify the version of the Argon2 library used (important for upgrade process).
+
+== implementation proposal ==
+
+The following class propose utility methods to compute and verify a hash of a password along creating a abstraction layer on the algorithm used behind the scene.
+
+<syntaxhighlight lang="java">
+  import de.mkammerer.argon2.Argon2;
+  import de.mkammerer.argon2.Argon2Factory;
+  import org.checkerframework.checker.nullness.qual.NonNull;
+  import java.nio.charset.Charset;
+  import java.util.Enumeration;
+  import java.util.HashMap;
+  import java.util.Map;
+  import java.util.ResourceBundle;
+
+  /**
+   * This class provided utility methods to create and verify a hash of a password.
+   *
+   * This implementation can be used to create a company internal shared java utility library that embed your compiled version of the Argon2 library
+   * to ensure that no external untrusted binary as used in your information system.
+   *
+   * As hash will be used for password type of information then the variant named "Argon2i" of Argon2 will be used.
+   *
+   * The hash creation method return a hash with all information in order to allow the application that need to verify the hash to be in a full stateless mode.
+   */
+  public final class PasswordUtil {
+
+      /**
+       * Compute a hash of a password.
+       * Password provided is wiped from the memory at the end of this method
+       *
+       * @param password Password to hash
+       * @param charset  Charset of the password
+       * @return the hash in format "$argon2i$v=19$m=128000,t=3,p=4$sfSe5MewORVlg8cDtxOTbg$uqWx4mZvLI092oJ8ZwAjAWU0rrBSDQkOezxAuvrE5dM"
+       */
+      public static String hash(@NonNull char[] password, @NonNull Charset charset) {
+          String hash;
+          Argon2 argon2Hasher = null;
+          try {
+              // Create instance
+              argon2Hasher = createInstance();
+              //Create options
+              Map<String, String> options = loadParameters();
+              int iterationsCount = Integer.parseInt(options.get("ITERATIONS"));
+              int memoryAmountToUse = Integer.parseInt(options.get("MEMORY"));
+              int threadToUse = Integer.parseInt(options.get("PARALLELISM"));
+              //Compute and return the hash
+              hash = argon2Hasher.hash(iterationsCount, memoryAmountToUse, threadToUse, password, charset);
+          } finally {
+              //Clean the password from the memory
+              if (argon2Hasher != null) {
+                  argon2Hasher.wipeArray(password);
+              }
+          }
+          return hash;
+      }
+
+      /**
+       * Verifies a password against a hash
+       * Password provided is wiped from the memory at the end of this method
+       *
+       * @param hash     Hash to verify
+       * @param password Password to which hash must be verified against
+       * @param charset  Charset of the password
+       * @return True if the password matches the hash, false otherwise.
+       */
+      public static boolean verify(@NonNull String hash, @NonNull char[] password, @NonNull Charset charset) {
+          Argon2 argon2Hasher = null;
+          boolean isMatching;
+          try {
+              // Create instance
+              argon2Hasher = createInstance();
+              //Apply the verification (hash computation options are included in the hash itself)
+              isMatching = argon2Hasher.verify(hash, password, charset);
+          } finally {
+              //Clean the password from the memory
+              if (argon2Hasher != null) {
+                  argon2Hasher.wipeArray(password);
+              }
+          }
+          return isMatching;
+      }
+
+      /**
+       * Create and configure an Argon2 instance
+       *
+       * @return The Argon2 instance
+       */
+      private static Argon2 createInstance() {
+          // Create and return the instance
+          return Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
+      }
+
+
+      /**
+       * Load Argon2 options to use for hashing.
+       *
+       * @return A map with the options
+       */
+      private static Map<String, String> loadParameters() {
+          Map<String, String> options = new HashMap<>();
+          ResourceBundle optionsBundle = ResourceBundle.getBundle("config");
+          String k;
+          Enumeration<String> keys = optionsBundle.getKeys();
+          while (keys.hasMoreElements()) {
+              k = keys.nextElement();
+              options.putIfAbsent(k, optionsBundle.getString(k).trim());
+          }
+          return options;
+      }
+  }
+</syntaxhighlight>
+
+Proposed configuration options for Argon2 are based on the following source of recommendation:
+* [https://github.com/P-H-C/phc-winner-argon2/issues/59 PHC project].
+* Section 9 of the Argon2 [https://github.com/P-H-C/phc-winner-argon2/blob/master/argon2-specs.pdf specifications document].
+
+Documented configuration is the following:
+
+<syntaxhighlight lang="python" highlight="15,17,19">
+# Configuration to define Argon2 options
+# See https://github.com/P-H-C/phc-winner-argon2#command-line-utility
+# See https://github.com/phxql/argon2-jvm/blob/master/src/main/java/de/mkammerer/argon2/Argon2.java
+# See https://github.com/P-H-C/phc-winner-argon2/issues/59
+#
+# Number of iterations, here adapted to take at least 2 seconds
+# Tested on the following environments:
+#   ENV NUMBER 1: LAPTOP - 15 Iterations is enough to reach 2 seconds processing time
+#       CPU: Intel Core i7-2670QM 2.20 GHz with 8 logical processors and 4 cores
+#       RAM: 24GB but no customization on JVM (Java8 32 bits)
+#       OS: Windows 10 Pro 64 bits
+#   ENV NUMBER 2: TRAVIS CI LINUX VM - 15 Iterations is NOT enough to reach 2 seconds processing time (processing time take 1 second)
+#       See details on https://docs.travis-ci.com/user/reference/overview/#Virtualisation-Environment-vs-Operating-System
+#       "Ubuntu Precise" and "Ubuntu Trusty" using infrastructure "Virtual machine on GCE" were used (GCE = Google Compute Engine)
+ITERATIONS=30
+# The memory usage of 2^N KiB, here set to recommended value from Issue n°9 of PHC project (128 MB)
+MEMORY=128000
+# Parallelism to N threads here set to recommended value from Issue n°9 of PHC project
+PARALLELISM=4
+</syntaxhighlight>
+
+== Sources of the prototype ==
+
+The entire source code of the POC is available [https://github.com/righettod/poc-argon2 here].
