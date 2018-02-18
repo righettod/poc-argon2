@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d9dd9eda-61ff-4215-90b1-550f46f56a52" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/eu/righettod/pocargon2/PasswordUtilTest.java" afterPath="$PROJECT_DIR$/src/test/java/eu/righettod/pocargon2/PasswordUtilTest.java" />
+      <change beforePath="$PROJECT_DIR$/setup-argon2-ri.sh" afterPath="$PROJECT_DIR$/setup-argon2-ri.sh" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -94,11 +93,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PasswordUtilTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="setup-argon2-ri.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/setup-argon2-ri.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PasswordUtilTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/eu/righettod/pocargon2/PasswordUtilTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="99" column="132" lean-forward="false" selection-start-line="99" selection-start-column="132" selection-end-line="99" selection-end-column="132" />
+            <state relative-caret-position="64">
+              <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -487,11 +496,11 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/java/eu/righettod/pocargon2/PasswordUtil.java" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/setup-argon2-ri.sh" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
         <option value="$PROJECT_DIR$/src/test/java/eu/righettod/pocargon2/PasswordUtilTest.java" />
+        <option value="$PROJECT_DIR$/setup-argon2-ri.sh" />
       </list>
     </option>
   </component>
@@ -825,7 +834,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518943958412</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Debug TravisCI build fail">
+      <created>1518944364075</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1518944364075</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1091,14 +1107,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup-argon2-ri.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="9" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -1125,8 +1133,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/eu/righettod/pocargon2/PasswordUtilTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="99" column="132" lean-forward="false" selection-start-line="99" selection-start-column="132" selection-end-line="99" selection-end-column="132" />
+        <state relative-caret-position="64">
+          <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup-argon2-ri.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
