@@ -1,4 +1,4 @@
-= Argon2 usage proposition in Java =
+= Argon2 usage proposal in Java =
 
 The objective is to propose a example of secure usage/integration of the Argon2 algorithm in Java application to protect password when stored.
 
