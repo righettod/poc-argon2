@@ -4,7 +4,6 @@
     <list default="true" id="d9dd9eda-61ff-4215-90b1-550f46f56a52" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/eu/righettod/pocargon2/PasswordUtilTest.java" afterPath="$PROJECT_DIR$/src/test/java/eu/righettod/pocargon2/PasswordUtilTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -843,7 +842,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518945628969</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Debug TravisCI build fail">
+      <created>1518946983494</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1518946983494</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TestHistory">
