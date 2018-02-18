@@ -22,7 +22,7 @@ public class PasswordUtilTest {
      */
     @Test
     public void testHashCorrectComputation() {
-        char[] password = "test".toCharArray();
+        char[] password = "testHashCorrectComputation".toCharArray();
         String hash = PasswordUtil.hash(password, Charset.forName("UTF-8"));
         Assert.assertNotNull("Hash must not be null", hash);
         Assert.assertTrue("Hash must not be empty", hash.trim().length() > 0);
@@ -41,8 +41,8 @@ public class PasswordUtilTest {
      */
     @Test
     public void testHashCorrectVerificationCaseOK() {
-        String hash = PasswordUtil.hash("test".toCharArray(), Charset.forName("UTF-8"));
-        char[] password = "test".toCharArray();
+        String hash = PasswordUtil.hash("testHashCorrectVerificationCaseOK".toCharArray(), Charset.forName("UTF-8"));
+        char[] password = "testHashCorrectVerificationCaseOK".toCharArray();
         boolean isMatching = PasswordUtil.verify(hash, password, Charset.forName("UTF-8"));
         Assert.assertTrue("Verification result must be TRUE", isMatching);
         for (char c : password) {
@@ -57,7 +57,7 @@ public class PasswordUtilTest {
      */
     @Test
     public void testHashCorrectVerificationCaseKO() {
-        String hash = PasswordUtil.hash("test".toCharArray(), Charset.forName("UTF-8"));
+        String hash = PasswordUtil.hash("testHashCorrectVerificationCaseKO".toCharArray(), Charset.forName("UTF-8"));
         char[] password = "testBadPassword".toCharArray();
         boolean isMatching = PasswordUtil.verify(hash, password, Charset.forName("UTF-8"));
         Assert.assertFalse("Verification result must be FALSE", isMatching);
@@ -72,7 +72,7 @@ public class PasswordUtilTest {
     @Test
     public void testComputationDelay() {
         Instant start = Instant.now();
-        PasswordUtil.hash(RandomStringUtils.randomAlphanumeric(8).toCharArray(), Charset.forName("UTF-8"));
+        PasswordUtil.hash("testComputationDelay".toCharArray(), Charset.forName("UTF-8"));
         Instant end = Instant.now();
         Duration timeElapsed = Duration.between(start, end);
         Assert.assertTrue("Duration must be >= to 2 seconds and the current result is " + timeElapsed.getSeconds() + " second(s)", timeElapsed.getSeconds() >= 2);
