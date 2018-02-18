@@ -18,4 +18,4 @@ install:
   - ./setup-argon2-ri.sh
 
 script:
-  - ./gradlew test
+  - ./gradlew clean test

@@ -17,3 +17,10 @@ dependencies {
     compile 'de.mkammerer:argon2-jvm-nolibs:2.3'
     compile group: 'org.checkerframework', name: 'checker', version: '2.3.2'
 }
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+}

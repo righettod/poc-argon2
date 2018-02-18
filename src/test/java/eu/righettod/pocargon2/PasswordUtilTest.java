@@ -24,12 +24,13 @@ public class PasswordUtilTest {
     public void testHashCorrectComputation() {
         char[] password = "test".toCharArray();
         String hash = PasswordUtil.hash(password, Charset.forName("UTF-8"));
-        Assert.assertNotNull(hash);
+        Assert.assertNotNull("Hash must not be null", hash);
+        Assert.assertTrue("Hash must not be empty",hash.trim().length() > 0);
         String[] hashParts = hash.split("\\$");
-        Assert.assertEquals(6, hashParts.length);
-        Assert.assertEquals("argon2i", hashParts[1]);
+        Assert.assertEquals("Hash must have 6 parts", 6, hashParts.length);
+        Assert.assertEquals("Hash algorithm must be Argon2i", "argon2i", hashParts[1]);
         for (char c : password) {
-            Assert.assertEquals('\u0000', c);
+            Assert.assertEquals("Content must be 0", '\u0000', c);
         }
     }
 
@@ -43,9 +44,9 @@ public class PasswordUtilTest {
         String hash = PasswordUtil.hash("test".toCharArray(), Charset.forName("UTF-8"));
         char[] password = "test".toCharArray();
         boolean isMatching = PasswordUtil.verify(hash, password, Charset.forName("UTF-8"));
-        Assert.assertTrue(isMatching);
+        Assert.assertTrue("Verification result must be TRUE", isMatching);
         for (char c : password) {
-            Assert.assertEquals('\u0000', c);
+            Assert.assertEquals("Content must be 0", '\u0000', c);
         }
     }
 
@@ -59,9 +60,9 @@ public class PasswordUtilTest {
         String hash = PasswordUtil.hash("test".toCharArray(), Charset.forName("UTF-8"));
         char[] password = "testBadPassword".toCharArray();
         boolean isMatching = PasswordUtil.verify(hash, password, Charset.forName("UTF-8"));
-        Assert.assertFalse(isMatching);
+        Assert.assertFalse("Verification result must be FALSE", isMatching);
         for (char c : password) {
-            Assert.assertEquals('\u0000', c);
+            Assert.assertEquals("Content must be 0", '\u0000', c);
         }
     }
 
@@ -74,7 +75,7 @@ public class PasswordUtilTest {
         PasswordUtil.hash("test".toCharArray(), Charset.forName("UTF-8"));
         Instant end = Instant.now();
         Duration timeElapsed = Duration.between(start, end);
-        Assert.assertTrue(timeElapsed.getSeconds() >= 2);
+        Assert.assertTrue("Duration must be >= to 2 seconds", timeElapsed.getSeconds() >= 2);
     }
 
     /**
@@ -96,7 +97,7 @@ public class PasswordUtilTest {
             PasswordUtil.hash(p.toCharArray(), Charset.forName("UTF-8"));
             Instant end = Instant.now();
             Duration timeElapsed = Duration.between(start, end);
-            Assert.assertTrue(timeElapsed.getSeconds() >= 2);
+            Assert.assertTrue("Duration must be >= to 2 seconds", timeElapsed.getSeconds() >= 2);
         });
     }
 
