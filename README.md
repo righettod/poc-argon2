@@ -14,6 +14,8 @@ Argon2 options used are defined [here](src/main/resources/config.properties).
 
 # Argon2 library compilation
 
+[![Build Status](https://travis-ci.org/righettod/poc-argon2.svg?branch=master)](https://travis-ci.org/righettod/poc-argon2)
+
 The TravisCI integration file **.travis.yml** show an example of integration of the building of the Argon2 library in the process of build of a project.
 
 # Run unit tests
