@@ -22,7 +22,10 @@ Due to the kind of data processed (password), the implementation without the emb
 
 https://github.com/phxql/argon2-jvm/blob/master/docs/compile-argon2.md
 
-Always name the compiled library with this format: **argon2**.(dll|so|dylib)
+Always name the compiled library with this format: 
+* For Windows: **argon2**.dll
+* For Linux: **libargon2**.so
+* For OSX: **libargon2**.dylib
 
 # Integration in company projects
 

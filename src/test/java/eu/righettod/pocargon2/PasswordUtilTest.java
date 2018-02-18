@@ -84,7 +84,7 @@ public class PasswordUtilTest {
      */
     @Test
     public void testOverallStabilityOfOptionsParallelProcessing() {
-        int tryCount = 20;
+        int tryCount = Integer.parseInt(System.getProperty("PARALLEL_TESTS_COUNT", "20"));
         //Prepare the list of passwords based on iteration counter
         List<String> passwords = new ArrayList<>(tryCount);
         for (int i = 0; i < tryCount; i++) {

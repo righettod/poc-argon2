@@ -1,0 +1,21 @@
+language: java
+
+sudo: enabled
+
+os:
+  - linux
+
+jdk:
+  - oraclejdk8
+  - openjdk8
+
+before_install:
+  - sudo apt-get update -q
+  - sudo apt-get install wget gcc clang unzip make -y
+
+install:
+  - chmod +x setup-argon2-ri.sh gradlew
+  - ./setup-argon2-ri.sh
+
+script:
+  - ./gradlew test
